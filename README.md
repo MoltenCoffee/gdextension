@@ -125,7 +125,7 @@ PropertyInfo(
 
 ```cpp
 Ref<RefCounted> object;
-object.initialize();
+object.instantiate();
 ```
 
 ### Classes extended from `Node`
