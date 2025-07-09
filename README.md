@@ -114,8 +114,20 @@ PropertyInfo(
   PROPERTY_HINT_ARRAY_TYPE,
   vformat(
     "%s/%s:%s", Variant::OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Material"
-  ),
-  PROPERTY_USAGE_DEFAULT
+  )
+)
+```
+
+### Type Dictionary
+
+```cpp
+PropertyInfo(
+  Variant::DICTIONARY,
+  "some_dictionary", // choose yourself
+  PROPERTY_HINT_DICTIONARY_TYPE,
+  vformat(
+    "%s;%s", Variant::STRING_NAME, Variant::INT // choose yourself
+  )
 )
 ```
 
