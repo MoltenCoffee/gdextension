@@ -136,3 +136,25 @@ node = memnew(Node);
 ```
 
 > Nodes automatically free children upon being freed
+
+## enums
+
+```cpp
+// class.h
+
+class ClassName : public Node {
+  public:
+    enum SOME_ENUM { ENUM_VAL0, ENUM_VAL1 };
+};
+
+VARIANT_ENUM_CAST(ClassName::SOME_ENUM);
+```
+
+```cpp
+// class.cpp
+
+void ClassName::_bind_methods() {
+  BIND_ENUM_CONSTANT(ENUM_VAL0);
+  BIND_ENUM_CONSTANT(ENUM_VAL1);
+}
+```
