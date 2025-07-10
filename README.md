@@ -108,6 +108,7 @@ Describes properties, also for signals.
 ### Typed Array
 
 ```cpp
+// Objects, eg Material
 PropertyInfo(
   Variant::ARRAY,
   "materials",
@@ -115,6 +116,14 @@ PropertyInfo(
   vformat(
     "%s/%s:%s", Variant::OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Material"
   )
+)
+
+// Variants, eg Vector2i
+PropertyInfo(
+  Variant::ARRAY,
+  "vectors" // choose yourself
+  PROPERTY_HINT_ARRAY_TYPE,
+  "Vector2i"
 )
 ```
 
