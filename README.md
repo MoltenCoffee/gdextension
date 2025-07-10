@@ -123,7 +123,7 @@ PropertyInfo(
   Variant::ARRAY,
   "vectors" // choose yourself
   PROPERTY_HINT_ARRAY_TYPE,
-  "Vector2i"
+  vformat("%s", Variant::VECTOR2I)
 )
 ```
 
