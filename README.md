@@ -181,3 +181,42 @@ void ClassName::_bind_methods() {
   BIND_ENUM_CONSTANT(ENUM_VAL1);
 }
 ```
+
+## Helpful macros
+
+### Creating getters/setters
+
+To be used in class definition. Creates basic `set_<var_name>` and `get_<var_name>`. Careful not to create conflicts.
+
+```cpp
+#define DECLARE_PROPERTY_GETSET(type, name) \
+  void set_##name(type value) { \
+    name = value; \
+  } \
+  type get_##name() const { \
+    return name; \
+  }
+```
+
+### Binding properties
+
+To be used inside `SomeClass::_bind_methods()`:
+
+```cpp
+#define BIND_PROPERTY(type, name, hint_type, hint_string, usage, class_name) \
+  ClassDB::bind_method(D_METHOD("set_" #name, #name), &self_type::set_##name); \
+  ClassDB::bind_method(D_METHOD("get_" #name), &self_type::get_##name); \
+  ADD_PROPERTY( \
+    PropertyInfo(type, #name, hint_type, hint_string, usage, class_name), \
+    "set_" #name, \
+    "get_" #name \
+  );
+
+// Simpler version exposing hints
+#define BIND_PROPERTY_WITH_HINT(type, name, hint_type, hint_string) \
+  BIND_PROPERTY(type, name, hint_type, hint_string, PROPERTY_USAGE_DEFAULT, "")
+
+// Simplest version, for basic types
+#define BIND_PROPERTY_SIMPLE(type, name) \
+  BIND_PROPERTY(type, name, PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT, "")
+```
