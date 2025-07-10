@@ -1,5 +1,7 @@
 # GDExtension
 
+This is a living document to document everything I discover regarding GDExtension that wasn't immediately clear from the available documentation.
+
 ```cpp
 // class.h
 
