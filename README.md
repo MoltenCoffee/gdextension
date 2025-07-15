@@ -182,6 +182,19 @@ void ClassName::_bind_methods() {
 }
 ```
 
+## Casting
+
+### Objects
+
+```cpp
+Node *some_unknown_node = get_child(0);
+Node3D Object::cast_to<Node3D>(some_unkown_node);
+```
+
+### Variant
+
+
+
 ## Helpful macros
 
 ### Creating getters/setters
