@@ -195,6 +195,8 @@ Node3D Object::cast_to<Node3D>(some_unkown_node);
 
 ## Singletons
 
+Using the singleton pattern in CPP is technically not needed (as `Engine::get_singleton()->get_singleton("SomeSingleton")` can be used instead), but this involves string comparisons. More efficient to use a direct CPP singleton in your CPP code and only register it for use from the engine/GDScript side.
+
 ```cpp
 // some_singleton.h
 using namespace godot;
@@ -213,7 +215,7 @@ public:
 
 ```cpp
 // some_singleton.cpp
-#include "some_singletond.h"
+#include "some_singleton.h"
 
 SomeSingleton *SomeSingleton::singleton = nullptr;
 
