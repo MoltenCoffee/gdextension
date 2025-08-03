@@ -193,7 +193,70 @@ Node3D Object::cast_to<Node3D>(some_unkown_node);
 
 ### Variant
 
+## Singletons
 
+```cpp
+// some_singleton.h
+using namespace godot;
+
+class SomeSingleton : public Node {
+  GDCLASS(SomeSingleton, Node);
+
+  static SomeSingleton *singleton;
+
+public:
+  static void create_singleton();
+  static void delete_singleton();
+  static SomeSingleton *get_singleton();
+};
+```
+
+```cpp
+// some_singleton.cpp
+#include "some_singletond.h"
+
+SomeSingleton *SomeSingleton::singleton = nullptr;
+
+void SomeSingleton::create_singleton() {
+  CRASH_COND_MSG(singleton != nullptr, "SomeSingleton singleton already exists!");
+  singleton = memnew(EventBus);
+}
+
+void SomeSingleton::remove_singleton() {
+  CRASH_COND_MSG(singleton == nullptr, "SomeSingleton singleton does not exist!");
+  memdelete(singleton);
+  singleton = nullptr;
+}
+
+SomeSingleton *SomeSingleton::get_singleton() {
+  CRASH_COND_MSG(singleton == nullptr, "SomeSingleton singleton does not exist!");
+  return singleton;
+}
+```
+
+```cpp
+// register_types.cpp
+
+void initialize_module(ModuleInitializationLevel p_level) {
+  // (...)
+  GDREGISTER_CLASS(SomeSingleton);
+  SomeSingleton::create_singleton();
+  Engine::get_singleton()->register_singleton()
+    StringName("SomeSingleton"), SomeSingleton::get_singleton()
+  };
+  // (...)
+}
+
+void uninitialize_game_module(ModuleInitializationLevel p_level) {
+  // (...)
+
+  Engine::get_singleton()->unregister_singleton(StringName("SomeSingleton"));
+  SomeSingleton::remove_singleton();
+// (...)
+}
+
+// (...)
+```
 
 ## Helpful macros
 
